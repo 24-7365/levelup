@@ -14,13 +14,7 @@ module Levelup
       attr_accessor :spend_amount
 
       def body
-        items = (@items || []).map do |item|
-          if item.empty?
-            next
-          end
-
-          { :item => item }
-        end
+        items = (@items || []).reject { |item| item.empty? }
 
         order_hash = to_hash
         order_hash[:items] = items
